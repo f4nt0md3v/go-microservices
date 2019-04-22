@@ -1,0 +1,10 @@
+syntax = "proto3";
+package pb;
+
+message Post {
+    string command = 1;
+    string post_id = 2;
+    string title = 3;
+    string date = 4;
+    string client_uuid = 5;
+}
