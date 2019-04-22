@@ -1,4 +1,6 @@
-client-service
-storage-service
+cmd/client-service
+cmd/storage-service
+/client-service
+/storage-service
 .idea
 .vscode

@@ -1,0 +1,10 @@
+syntax = "proto3";
+package pb;
+
+message Nats {
+    bool isSuccess = 1;
+    string details = 2;
+    int32 error_code = 3;
+    string client_uuid = 4;
+    string method = 5;
+}
