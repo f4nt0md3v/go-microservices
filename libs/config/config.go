@@ -30,7 +30,19 @@ func initConfig() error {
 	viper.SetDefault("nats_pass", "")
 	viper.SetDefault("nats_cluster", "test-cluster")
 
-	// HTTP service.
+	// CockroachDB.
+	viper.BindEnv("cockroach_host")
+	viper.BindEnv("cockroach_port")
+	viper.BindEnv("cockroach_user")
+	viper.BindEnv("cockroach_password")
+	viper.BindEnv("cockroach_sslmode")
+	viper.SetDefault("cockroach_host", "localhost")
+	viper.SetDefault("cockroach_port", 26257)
+	viper.SetDefault("cockroach_user", "root")
+	viper.SetDefault("cockroach_password", "")
+	viper.SetDefault("cockroach_sslmode", "disable")
+
+	// CLIENT service.
 	viper.BindEnv("client_service_port")
 	viper.SetDefault("client_service_port", 9110)
 
