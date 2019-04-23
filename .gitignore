@@ -2,5 +2,6 @@
 /storage-service
 /cli
 /build
+/vendor
 .idea
 .vscode

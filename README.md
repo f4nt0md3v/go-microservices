@@ -35,6 +35,12 @@ with any result data (new post, all posts, CRUD status, etc.)
 ---
 # Build & run in docker-compose
 
+
+If you have problem with `go modules`, execute: 
+```
+$ make vendor
+```
+
 ```
 $ make clean
 $ make
@@ -46,7 +52,7 @@ $ docker-compose up -d --force-recreate --build
 # Build Command Line Interface
 
 ```
-$ C111MODULE=on go build -v cli.go
+$ G111MODULE=on go build -v cli.go
 ```
 
 ---

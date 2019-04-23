@@ -2,16 +2,21 @@
 
 GOOS=linux
 GOARCH=amd64
-C111MODULE= on
+G111MODULE=on
 BUILD_DIR=build
 
 .PHONY: \
     all \
+    vendor \
     build_client \
     build_storage \
     prepare
 
 all: prepare
+
+vendor:
+    go mod vendor
+
 
 build_client:
 	go build -v client-service.go
