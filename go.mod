@@ -16,7 +16,9 @@ require (
 	github.com/nats-io/nuid v1.0.1 // indirect
 	github.com/satori/go.uuid v1.2.0
 	github.com/sirupsen/logrus v1.4.1
+	github.com/spf13/cobra v0.0.3
 	github.com/spf13/viper v1.3.2
 	github.com/thoas/go-funk v0.4.0
 	github.com/x-cray/logrus-prefixed-formatter v0.5.2
+	gopkg.in/yaml.v2 v2.2.2
 )

@@ -14,10 +14,10 @@ BUILD_DIR=build
 all: prepare
 
 build_client:
-	go build -v cmd/client-service.go
+	go build -v client-service.go
 
 build_storage:
-	go build -v cmd/storage-service.go
+	go build -v storage-service.go
 
 prepare: build_client build_storage
 	mkdir -p $(BUILD_DIR) &&\

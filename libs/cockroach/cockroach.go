@@ -7,12 +7,17 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"go-microservices/libs/config"
 	"go-microservices/libs/logger"
+	"os"
+	"sync"
 )
 
 var database_connect *gorm.DB
+var connMutexR = sync.RWMutex{}
 
 // Return SQLite connection.
 func Connection() (*gorm.DB, error) {
+	connMutexR.Lock()
+	defer connMutexR.Unlock()
 	if database_connect == nil {
 		db, err := gorm.Open("postgres",
 			fmt.Sprintf("postgresql://%s:%s@%s:%d?sslmode=%s&dbname=%s",
@@ -22,20 +27,11 @@ func Connection() (*gorm.DB, error) {
 				config.GetInt("cockroach_port"),
 				config.GetString("cockroach_sslmode"),
 				config.GetString("cockroach_db")))
-		fmt.Println(fmt.Sprintf("postgresql://%s:%s@%s:%d?sslmode=%s&dbname=%s",
-			config.GetString("cockroach_user"),
-			config.GetString("cockroach_pass"),
-			config.GetString("cockroach_host"),
-			config.GetInt("cockroach_port"),
-			config.GetString("cockroach_sslmode"),
-			config.GetString("cockroach_db")))
 		if err != nil {
-			if err != nil {
-				logger.GetCockroach().Error(10, map[string]interface{}{
-					"error": err,
-				})
-				return nil, err
-			}
+			logger.GetCockroach().Error(10, map[string]interface{}{
+				"error": err,
+			})
+			os.Exit(1)
 			return nil, err
 		}
 

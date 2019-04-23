@@ -10,11 +10,16 @@ import (
 	"go-microservices/libs/json_codec"
 	"go-microservices/libs/logger"
 	"go-microservices/pb"
+	"os"
+	"sync"
 )
 
 var conn *stan.Conn
+var connMutexR = sync.RWMutex{}
 
 func Connection() *stan.Conn {
+	connMutexR.Lock()
+	defer connMutexR.Unlock()
 	if conn == nil {
 		uid := uuid.NewV4()
 
@@ -35,7 +40,7 @@ func Connection() *stan.Conn {
 }
 
 type NatsMessage struct {
-	Service   string
+	Services  []string
 	ErrorCode int32
 	IsSuccess bool
 	Method    string
@@ -58,35 +63,36 @@ func Publish(m NatsMessage) {
 	})
 	if err != nil {
 		logger.GetNats().Error(30, map[string]interface{}{
-			"service": m.Service,
+			"services": m.Services,
 		})
 		return
 	}
+	for _, service := range m.Services {
+		go func(serviceName string) {
+			_, err = (*Connection()).PublishAsync(serviceName, s, nil)
+			if err != nil {
+				logger.GetNats().Error(40, map[string]interface{}{
+					"error":   err,
+					"service": serviceName,
+					"message": m,
+				})
+				return
+			}
 
-	go func() {
-		_, err = (*Connection()).PublishAsync(m.Service, s, nil)
-		if err != nil {
-			logger.GetNats().Error(40, map[string]interface{}{
-				"error":   err,
-				"service": m.Service,
-				"message": m,
-			})
-			return
-		}
-
-		if config.GetBool("dev") {
-			logger.GetNats().Info(20, map[string]interface{}{
-				"service": m.Service,
-				"message": m,
-			})
-		}
-	}()
+			if config.GetBool("dev") {
+				logger.GetNats().Info(20, map[string]interface{}{
+					"service": serviceName,
+					"message": m,
+				})
+			}
+		}(service)
+	}
 }
 
-func InitSubscribe(topic string, handler map[string]func(map[string]interface{}, string), errorHandle func(int32, map[string]interface{}, string)) {
+func InitSubscribe(topic string, handler map[string]func(map[string]interface{}, string), errorHandle func(int32, map[string]interface{}, string), close chan interface{}) {
 	con := Connection()
 	if conn == nil {
-		return
+		os.Exit(1)
 	}
 
 	sub, err := (*con).Subscribe(topic, func(m *stan.Msg) {
@@ -129,6 +135,10 @@ func InitSubscribe(topic string, handler map[string]func(map[string]interface{},
 			"services": topic,
 		})
 		defer sub.Unsubscribe()
-		select {}
+		if close != nil {
+			<-close
+		} else {
+			select {}
+		}
 	}
 }

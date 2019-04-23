@@ -1,7 +1,6 @@
-cmd/client-service
-cmd/storage-service
 /client-service
 /storage-service
+/cli
 /build
 .idea
 .vscode

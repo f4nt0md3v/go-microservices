@@ -12,7 +12,7 @@ func GetPosts(param map[string]interface{}, clientID string) {
 	posts, err := cockroach.GetAllPosts()
 	if err != nil {
 		nats.Publish(nats.NatsMessage{
-			Service:   nats.CLIENT_SREVICE,
+			Services:  []string{nats.CLIENT_SREVICE},
 			ClientID:  clientID,
 			IsSuccess: false,
 			Method:    "GetPosts",
@@ -22,7 +22,7 @@ func GetPosts(param map[string]interface{}, clientID string) {
 	}
 
 	nats.Publish(nats.NatsMessage{
-		Service:   nats.CLIENT_SREVICE,
+		Services:  []string{nats.CLIENT_SREVICE, nats.CLI_SERVICE},
 		ClientID:  clientID,
 		IsSuccess: true,
 		Details: map[string]interface{}{
@@ -47,7 +47,7 @@ func GetPost(param map[string]interface{}, clientID string) {
 	post, err := cockroach.GetPost(id)
 	if err != nil {
 		nats.Publish(nats.NatsMessage{
-			Service:   nats.CLIENT_SREVICE,
+			Services:  []string{nats.CLIENT_SREVICE, nats.CLI_SERVICE},
 			ClientID:  clientID,
 			IsSuccess: false,
 			Method:    "GetPost",
@@ -57,7 +57,7 @@ func GetPost(param map[string]interface{}, clientID string) {
 	}
 
 	nats.Publish(nats.NatsMessage{
-		Service:   nats.CLIENT_SREVICE,
+		Services:  []string{nats.CLIENT_SREVICE, nats.CLI_SERVICE},
 		ClientID:  clientID,
 		IsSuccess: true,
 		Details: map[string]interface{}{
@@ -73,7 +73,7 @@ func NewPost(param map[string]interface{}, clientID string) {
 	title, err := json_codec.GetString("title", param)
 	if err != nil {
 		nats.Publish(nats.NatsMessage{
-			Service:   nats.CLIENT_SREVICE,
+			Services:  []string{nats.CLIENT_SREVICE, nats.CLI_SERVICE},
 			ClientID:  clientID,
 			IsSuccess: false,
 			Method:    "NewPost",
@@ -87,7 +87,7 @@ func NewPost(param map[string]interface{}, clientID string) {
 	})
 	if err != nil {
 		nats.Publish(nats.NatsMessage{
-			Service:   nats.CLIENT_SREVICE,
+			Services:  []string{nats.CLIENT_SREVICE, nats.CLI_SERVICE},
 			ClientID:  clientID,
 			IsSuccess: false,
 			Method:    "NewPost",
@@ -97,7 +97,7 @@ func NewPost(param map[string]interface{}, clientID string) {
 	}
 
 	nats.Publish(nats.NatsMessage{
-		Service:   nats.CLIENT_SREVICE,
+		Services:  []string{nats.CLIENT_SREVICE, nats.CLI_SERVICE},
 		ClientID:  clientID,
 		IsSuccess: true,
 		Details: map[string]interface{}{
@@ -113,7 +113,7 @@ func UpdatePost(param map[string]interface{}, clientID string) {
 	title, err := json_codec.GetString("title", param)
 	if err != nil {
 		nats.Publish(nats.NatsMessage{
-			Service:   nats.CLIENT_SREVICE,
+			Services:  []string{nats.CLIENT_SREVICE, nats.CLI_SERVICE},
 			ClientID:  clientID,
 			IsSuccess: false,
 			Method:    "UpdatePost",
@@ -129,7 +129,7 @@ func UpdatePost(param map[string]interface{}, clientID string) {
 	err = cockroach.UpdatePost(cockroach.Post{ID: id}, cockroach.Post{Title: title})
 	if err != nil {
 		nats.Publish(nats.NatsMessage{
-			Service:   nats.CLIENT_SREVICE,
+			Services:  []string{nats.CLIENT_SREVICE, nats.CLI_SERVICE},
 			ClientID:  clientID,
 			IsSuccess: false,
 			Method:    "UpdatePost",
@@ -139,7 +139,7 @@ func UpdatePost(param map[string]interface{}, clientID string) {
 	}
 
 	nats.Publish(nats.NatsMessage{
-		Service:   nats.CLIENT_SREVICE,
+		Services:  []string{nats.CLIENT_SREVICE, nats.CLI_SERVICE},
 		ClientID:  clientID,
 		IsSuccess: true,
 		Details: map[string]interface{}{
@@ -158,7 +158,7 @@ func DeletePost(param map[string]interface{}, clientID string) {
 	err = cockroach.DeletePost(id)
 	if err != nil {
 		nats.Publish(nats.NatsMessage{
-			Service:   nats.CLIENT_SREVICE,
+			Services:  []string{nats.CLIENT_SREVICE, nats.CLI_SERVICE},
 			ClientID:  clientID,
 			IsSuccess: false,
 			Method:    "DeletePost",
@@ -168,7 +168,7 @@ func DeletePost(param map[string]interface{}, clientID string) {
 	}
 
 	nats.Publish(nats.NatsMessage{
-		Service:   nats.CLIENT_SREVICE,
+		Services:  []string{nats.CLIENT_SREVICE, nats.CLI_SERVICE},
 		ClientID:  clientID,
 		IsSuccess: true,
 		Details: map[string]interface{}{
@@ -182,7 +182,7 @@ func getID(method string, param map[string]interface{}, clientID string) (int64,
 	i, err := json_codec.GetString("id", param)
 	if err != nil {
 		nats.Publish(nats.NatsMessage{
-			Service:   nats.CLIENT_SREVICE,
+			Services:  []string{nats.CLIENT_SREVICE, nats.CLI_SERVICE},
 			ClientID:  clientID,
 			IsSuccess: false,
 			Method:    method,
@@ -196,7 +196,7 @@ func getID(method string, param map[string]interface{}, clientID string) (int64,
 	id, err := strconv.ParseInt(i, 10, 64)
 	if err != nil {
 		nats.Publish(nats.NatsMessage{
-			Service:   nats.CLIENT_SREVICE,
+			Services:  []string{nats.CLIENT_SREVICE, nats.CLI_SERVICE},
 			ClientID:  clientID,
 			IsSuccess: false,
 			Method:    method,

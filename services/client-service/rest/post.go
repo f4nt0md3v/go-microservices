@@ -7,7 +7,7 @@ import (
 	"go-microservices/services/client-service/helpers"
 )
 
-func PostRest(router *gin.Engine) {
+func PostRest(router *gin.RouterGroup) {
 	router.GET("/posts", getPosts)
 	router.GET("/post/:id", getPost)
 	router.POST("/post", newPost)

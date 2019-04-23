@@ -6,6 +6,12 @@ import (
 	"github.com/x-cray/logrus-prefixed-formatter"
 )
 
+var isLog bool = true
+
+func SetIsLogOut(f bool) {
+	isLog = f
+}
+
 // Create new logger.
 func NewLogger(prefix string, successHandler map[int]string, errorHandler map[int]string) *Logger {
 	log := logrus.New()
@@ -37,6 +43,10 @@ type Logger struct {
 
 // Print INFO LEVEL message.
 func (self *Logger) Info(code int, args ...interface{}) {
+	if !isLog {
+		return
+	}
+
 	message, okMessage := self.SuccessHandler[code]
 	if !okMessage {
 		return
@@ -56,6 +66,10 @@ func (self *Logger) Info(code int, args ...interface{}) {
 
 // Print ERROR LEVEL message.
 func (self *Logger) Error(code int, args ...interface{}) {
+	if !isLog {
+		return
+	}
+
 	message, okMessage := self.ErrorHandler[code]
 	if !okMessage {
 		return

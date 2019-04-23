@@ -10,7 +10,6 @@ import (
 // Create Service.
 func CreateService() {
 	cockroach.Connection()
-	//defer cockroach.Connection().clo
-	go nats.InitSubscribe(nats.STORAGE_SERVICE, nats_api.Handler, nats_api.ErrorHandler)
+	go nats.InitSubscribe(nats.STORAGE_SERVICE, nats_api.Handler, nats_api.ErrorHandler, nil)
 	select {}
 }

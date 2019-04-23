@@ -23,7 +23,7 @@ func CreateService() {
 		gin.SetMode(gin.ReleaseMode)
 	}
 
-	go nats.InitSubscribe(nats.CLIENT_SREVICE, nats_api.Handler, nats_api.ErrorHandler)
+	go nats.InitSubscribe(nats.CLIENT_SREVICE, nats_api.Handler, nats_api.ErrorHandler, nil)
 
 	router := gin.New()
 	router.Use(cors.New(cors.Config{
@@ -41,7 +41,9 @@ func CreateService() {
 		helpers.SendErrorCall(errors_handler.GetError(100), c)
 	})
 
-	rest.InitRest(router)
+	clientRouter := router.Group("/client")
+
+	rest.InitRest(clientRouter)
 
 	s := &http.Server{
 		Addr:           fmt.Sprintf(":%d", config.GetInt("client_service_port")),

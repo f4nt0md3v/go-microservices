@@ -1,12 +1,12 @@
 {
 	"info": {
-		"_postman_id": "994725c7-83cc-4692-ba7c-110f2fc9320c",
+		"_postman_id": "afaf85fe-3a64-4119-ae03-b930fee7a1bc",
 		"name": "go-microservices",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "localhost:9110/post",
+			"name": "localhost/client/post",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -15,12 +15,12 @@
 					"raw": "{\n\t\"title\": \"Title_1\"\n}"
 				},
 				"url": {
-					"raw": "localhost:9110/post",
+					"raw": "localhost/client/post",
 					"host": [
 						"localhost"
 					],
-					"port": "9110",
 					"path": [
+						"client",
 						"post"
 					]
 				}
@@ -28,7 +28,7 @@
 			"response": []
 		},
 		{
-			"name": "localhost:9110/post",
+			"name": "localhost/client/post",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -37,12 +37,12 @@
 					"raw": "{\n\t\"title\": \"Title_2\"\n}"
 				},
 				"url": {
-					"raw": "localhost:9110/post",
+					"raw": "localhost/client/post",
 					"host": [
 						"localhost"
 					],
-					"port": "9110",
 					"path": [
+						"client",
 						"post"
 					]
 				}
@@ -50,7 +50,7 @@
 			"response": []
 		},
 		{
-			"name": "localhost:9110/post",
+			"name": "localhost/client/post",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -59,12 +59,12 @@
 					"raw": "{\n\t\"title\": \"Title_3\"\n}"
 				},
 				"url": {
-					"raw": "localhost:9110/post",
+					"raw": "localhost/client/post",
 					"host": [
 						"localhost"
 					],
-					"port": "9110",
 					"path": [
+						"client",
 						"post"
 					]
 				}
@@ -72,7 +72,7 @@
 			"response": []
 		},
 		{
-			"name": "localhost:9110/posts",
+			"name": "localhost/client/posts",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -81,12 +81,12 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "localhost:9110/posts",
+					"raw": "localhost/client/posts",
 					"host": [
 						"localhost"
 					],
-					"port": "9110",
 					"path": [
+						"client",
 						"posts"
 					]
 				}
@@ -94,7 +94,7 @@
 			"response": []
 		},
 		{
-			"name": "localhost:9110/post/445439874029813761",
+			"name": "localhost/client/post/445439874029813761",
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -103,12 +103,12 @@
 					"raw": "{\n\t\"title\": \"Change title\"\n}"
 				},
 				"url": {
-					"raw": "localhost:9110/post/445439874029813761",
+					"raw": "localhost/client/post/445439874029813761",
 					"host": [
 						"localhost"
 					],
-					"port": "9110",
 					"path": [
+						"client",
 						"post",
 						"445439874029813761"
 					]
@@ -117,7 +117,7 @@
 			"response": []
 		},
 		{
-			"name": "localhost:9110/posts",
+			"name": "localhost/client/posts",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -126,12 +126,12 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "localhost:9110/posts",
+					"raw": "localhost/client/posts",
 					"host": [
 						"localhost"
 					],
-					"port": "9110",
 					"path": [
+						"client",
 						"posts"
 					]
 				}
@@ -139,7 +139,7 @@
 			"response": []
 		},
 		{
-			"name": "localhost:9110/post/445439874029813761",
+			"name": "localhost/client/post/445439874029813761",
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -148,12 +148,12 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "localhost:9110/post/445439874029813761",
+					"raw": "localhost/client/post/445439874029813761",
 					"host": [
 						"localhost"
 					],
-					"port": "9110",
 					"path": [
+						"client",
 						"post",
 						"445439874029813761"
 					]
@@ -162,7 +162,7 @@
 			"response": []
 		},
 		{
-			"name": "localhost:9110/posts",
+			"name": "localhost/client/posts",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -171,12 +171,12 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "localhost:9110/posts",
+					"raw": "localhost/client/posts",
 					"host": [
 						"localhost"
 					],
-					"port": "9110",
 					"path": [
+						"client",
 						"posts"
 					]
 				}

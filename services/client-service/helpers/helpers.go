@@ -47,7 +47,7 @@ func NatsRpcCall(n NatsRpc) (bool, map[string]interface{}, int) {
 	uid := uuid.NewV4().String()
 	storage.GetStorage().AddToStorage(uid, ch)
 	nats.Publish(nats.NatsMessage{
-		Service:   n.Service,
+		Services:  []string{n.Service},
 		IsSuccess: true,
 		Method:    n.Method,
 		Details:   n.Param,
