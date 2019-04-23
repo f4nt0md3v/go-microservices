@@ -15,8 +15,7 @@ BUILD_DIR=build
 all: prepare
 
 vendor:
-    go mod vendor
-
+	go mod vendor
 
 build_client:
 	go build -v client-service.go
