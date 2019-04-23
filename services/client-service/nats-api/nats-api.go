@@ -7,6 +7,7 @@ import (
 )
 
 var Handler map[string]func(map[string]interface{}, string) = map[string]func(map[string]interface{}, string){
+	"GetPosts":   methods.UniversalNatsRpcReply,
 	"GetPost":    methods.UniversalNatsRpcReply,
 	"NewPost":    methods.UniversalNatsRpcReply,
 	"UpdatePost": methods.UniversalNatsRpcReply,

@@ -3,7 +3,7 @@ package helpers
 
 import (
 	"github.com/gin-gonic/gin"
-	uuid "github.com/satori/go.uuid"
+	"github.com/satori/go.uuid"
 	"go-microservices/libs/errors_handler"
 	"go-microservices/libs/nats"
 	"go-microservices/services/client-service/constants"

@@ -34,13 +34,15 @@ func initConfig() error {
 	viper.BindEnv("cockroach_host")
 	viper.BindEnv("cockroach_port")
 	viper.BindEnv("cockroach_user")
-	viper.BindEnv("cockroach_password")
+	viper.BindEnv("cockroach_pass")
 	viper.BindEnv("cockroach_sslmode")
+	viper.BindEnv("cockroach_db")
 	viper.SetDefault("cockroach_host", "localhost")
 	viper.SetDefault("cockroach_port", 26257)
 	viper.SetDefault("cockroach_user", "root")
-	viper.SetDefault("cockroach_password", "")
+	viper.SetDefault("cockroach_pass", "")
 	viper.SetDefault("cockroach_sslmode", "disable")
+	viper.SetDefault("cockroach_db", "postgres")
 
 	// CLIENT service.
 	viper.BindEnv("client_service_port")

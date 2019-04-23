@@ -16,4 +16,5 @@ var CockroachSuccess map[int]string = map[int]string{
 
 var CockroachErrors map[int]string = map[int]string{
 	10: "Error connection",
+	11: "Error query in db",
 }

@@ -1,8 +1,8 @@
 package json_codec
 
 import (
-	"fmt"
 	"errors"
+	"fmt"
 )
 
 // Get and check isExist field which has ANY type.

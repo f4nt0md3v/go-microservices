@@ -1,7 +1,9 @@
 package nats
 
 import (
+	"fmt"
 	"github.com/gogo/protobuf/proto"
+	nats_controller "github.com/nats-io/go-nats"
 	"github.com/nats-io/go-nats-streaming"
 	"github.com/satori/go.uuid"
 	"go-microservices/libs/config"
@@ -15,7 +17,14 @@ var conn *stan.Conn
 func Connection() *stan.Conn {
 	if conn == nil {
 		uid := uuid.NewV4()
-		sc, err := stan.Connect(config.GetString("nats_cluster"), uid.String())
+
+		nc, err := nats_controller.Connect(fmt.Sprintf("nats://%s:%d", config.GetString("nats_host"), config.GetInt("nats_port")),
+			nats_controller.UserInfo(config.GetString("nats_user"), config.GetString("nats_pass")))
+		if err != nil {
+			logger.GetNats().Error(10)
+		}
+
+		sc, err := stan.Connect(config.GetString("nats_cluster"), uid.String(), stan.NatsConn(nc))
 		if err != nil {
 			logger.GetNats().Error(10)
 			sc.Close()
@@ -122,5 +131,4 @@ func InitSubscribe(topic string, handler map[string]func(map[string]interface{},
 		defer sub.Unsubscribe()
 		select {}
 	}
-
 }

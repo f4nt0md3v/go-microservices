@@ -5,6 +5,7 @@ import (
 )
 
 var Handler map[string]func(map[string]interface{}, string) = map[string]func(map[string]interface{}, string){
+	"GetPosts":   methods.GetPosts,
 	"GetPost":    methods.GetPost,
 	"NewPost":    methods.NewPost,
 	"UpdatePost": methods.UpdatePost,

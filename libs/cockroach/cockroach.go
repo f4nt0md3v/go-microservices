@@ -12,15 +12,23 @@ import (
 var database_connect *gorm.DB
 
 // Return SQLite connection.
-func Connection() (*gorm.DB, interface{}) {
+func Connection() (*gorm.DB, error) {
 	if database_connect == nil {
 		db, err := gorm.Open("postgres",
-			fmt.Sprintf("postgresql://%s:%s@%s:%d?sslmode=%s",
+			fmt.Sprintf("postgresql://%s:%s@%s:%d?sslmode=%s&dbname=%s",
 				config.GetString("cockroach_user"),
-				config.GetString("cockroach_password"),
+				config.GetString("cockroach_pass"),
 				config.GetString("cockroach_host"),
 				config.GetInt("cockroach_port"),
-				config.GetString("cockroach_sslmode")))
+				config.GetString("cockroach_sslmode"),
+				config.GetString("cockroach_db")))
+		fmt.Println(fmt.Sprintf("postgresql://%s:%s@%s:%d?sslmode=%s&dbname=%s",
+			config.GetString("cockroach_user"),
+			config.GetString("cockroach_pass"),
+			config.GetString("cockroach_host"),
+			config.GetInt("cockroach_port"),
+			config.GetString("cockroach_sslmode"),
+			config.GetString("cockroach_db")))
 		if err != nil {
 			if err != nil {
 				logger.GetCockroach().Error(10, map[string]interface{}{

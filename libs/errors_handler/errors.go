@@ -9,6 +9,10 @@ var Handler map[int]string = map[int]string{
 	14: "Error in JSON ARRAY encode",
 	15: "Unknown URI",
 	16: "Permissions denied",
+	17: "Cannot get field",
+	18: "Miss All Fields",
+	19: "Error field type",
+	20: "Error pars field type",
 
 	// Client service errors.
 	100: "URI not found",

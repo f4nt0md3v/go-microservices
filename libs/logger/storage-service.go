@@ -29,4 +29,5 @@ var StorageServiceSuccess map[int]string = map[int]string{
 
 var StorageServiceErrors map[int]string = map[int]string{
 	10: "Error start storage service",
+
 }

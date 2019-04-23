@@ -8,16 +8,33 @@ import (
 )
 
 func PostRest(router *gin.Engine) {
+	router.GET("/posts", getPosts)
 	router.GET("/post/:id", getPost)
 	router.POST("/post", newPost)
 	router.PUT("/post/:id", updatePost)
 	router.DELETE("/post/:id", deletePost)
 }
 
+type Post struct {
+	Title string
+}
+
+func getPosts(c *gin.Context) {
+	helpers.NatsRpcCall(helpers.NatsRpc{
+		Service: nats.STORAGE_SERVICE,
+		Method:  "GetPosts",
+		IsReply: true,
+		Context: c,
+	})
+}
+
 func getPost(c *gin.Context) {
 	id := c.Param("id")
 	if id == "" {
-		helpers.SendErrorCall(errors_handler.GetError(200), c)
+		helpers.SendErrorCall(errors_handler.GetError(19, map[string]interface{}{
+			"field":   "id",
+			"message": "Field must be int",
+		}), c)
 		return
 	}
 
@@ -33,11 +50,24 @@ func getPost(c *gin.Context) {
 }
 
 func newPost(c *gin.Context) {
+	post := Post{}
+	err := c.BindJSON(&post)
+	if err != nil {
+		helpers.SendErrorCall(errors_handler.GetError(11), c)
+		return
+	}
+	if post.Title == "" {
+		helpers.SendErrorCall(errors_handler.GetError(17, map[string]interface{}{
+			"field": "title",
+		}), c)
+		return
+	}
+
 	helpers.NatsRpcCall(helpers.NatsRpc{
 		Service: nats.STORAGE_SERVICE,
 		Method:  "NewPost",
 		Param: map[string]interface{}{
-			"title": "twesdzsd d",
+			"title": post.Title,
 		},
 		IsReply: true,
 		Context: c,
@@ -47,7 +77,21 @@ func newPost(c *gin.Context) {
 func updatePost(c *gin.Context) {
 	id := c.Param("id")
 	if id == "" {
-		helpers.SendErrorCall(errors_handler.GetError(200), c)
+		helpers.SendErrorCall(errors_handler.GetError(19, map[string]interface{}{
+			"field":   "id",
+			"message": "Field must be int",
+		}), c)
+		return
+	}
+
+	post := Post{}
+	err := c.BindJSON(&post)
+	if err != nil {
+		helpers.SendErrorCall(errors_handler.GetError(11), c)
+		return
+	}
+	if post.Title == "" {
+		helpers.SendErrorCall(errors_handler.GetError(18), c)
 		return
 	}
 
@@ -55,7 +99,8 @@ func updatePost(c *gin.Context) {
 		Service: nats.STORAGE_SERVICE,
 		Method:  "UpdatePost",
 		Param: map[string]interface{}{
-			"title": "twesdzsd d",
+			"id":    id,
+			"title": post.Title,
 		},
 		IsReply: true,
 		Context: c,
@@ -65,7 +110,10 @@ func updatePost(c *gin.Context) {
 func deletePost(c *gin.Context) {
 	id := c.Param("id")
 	if id == "" {
-		helpers.SendErrorCall(errors_handler.GetError(200), c)
+		helpers.SendErrorCall(errors_handler.GetError(19, map[string]interface{}{
+			"field":   "id",
+			"message": "Field must be int",
+		}), c)
 		return
 	}
 
