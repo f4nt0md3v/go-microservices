@@ -58,6 +58,19 @@ $ G111MODULE=on go build -v cli.go
 ---
 # Show
 
-- Use [postman.json](postman.json) for import requests collection 
+### HTTP
+
+Use [postman.json](postman.json) for import requests collection 
 to [Postman](https://www.getpostman.com/) (`HTTP End-Point`)
-- Or use `./cli` for call any commands from your terminal (`CLI End-Point`)
+
+### CLI
+Or use `./cli` for call any commands from your terminal (`CLI End-Point`)
+
+Example:
+```
+$ ./cli get all
+$ ./cli new 'title new one'
+$ ./cli new 'title new second'
+$ ./cli get all
+```
+
