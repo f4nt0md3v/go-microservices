@@ -1,0 +1,9 @@
+FROM golang
+
+WORKDIR /opt
+
+COPY storage-service .
+
+RUN chmod +x storage-service
+
+CMD ["/opt/storage-service"]

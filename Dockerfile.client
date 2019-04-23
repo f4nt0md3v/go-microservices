@@ -1,0 +1,11 @@
+FROM golang
+
+WORKDIR /opt
+
+COPY client-service .
+
+RUN chmod +x client-service
+
+EXPOSE 9110
+
+CMD ["/opt/client-service"]

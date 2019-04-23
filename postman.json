@@ -1,0 +1,187 @@
+{
+	"info": {
+		"_postman_id": "994725c7-83cc-4692-ba7c-110f2fc9320c",
+		"name": "go-microservices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:9110/post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Title_1\"\n}"
+				},
+				"url": {
+					"raw": "localhost:9110/post",
+					"host": [
+						"localhost"
+					],
+					"port": "9110",
+					"path": [
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:9110/post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Title_2\"\n}"
+				},
+				"url": {
+					"raw": "localhost:9110/post",
+					"host": [
+						"localhost"
+					],
+					"port": "9110",
+					"path": [
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:9110/post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Title_3\"\n}"
+				},
+				"url": {
+					"raw": "localhost:9110/post",
+					"host": [
+						"localhost"
+					],
+					"port": "9110",
+					"path": [
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:9110/posts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:9110/posts",
+					"host": [
+						"localhost"
+					],
+					"port": "9110",
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:9110/post/445439874029813761",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Change title\"\n}"
+				},
+				"url": {
+					"raw": "localhost:9110/post/445439874029813761",
+					"host": [
+						"localhost"
+					],
+					"port": "9110",
+					"path": [
+						"post",
+						"445439874029813761"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:9110/posts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:9110/posts",
+					"host": [
+						"localhost"
+					],
+					"port": "9110",
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:9110/post/445439874029813761",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:9110/post/445439874029813761",
+					"host": [
+						"localhost"
+					],
+					"port": "9110",
+					"path": [
+						"post",
+						"445439874029813761"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:9110/posts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:9110/posts",
+					"host": [
+						"localhost"
+					],
+					"port": "9110",
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

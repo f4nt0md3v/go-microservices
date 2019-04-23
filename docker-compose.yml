@@ -1,0 +1,57 @@
+version: "3.2"
+
+services:
+
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile.client
+    ports:
+      - 9110:9110
+    container_name: client
+    env_file:
+      - .env
+    depends_on:
+      - nats
+    restart: always
+
+  storage:
+    build:
+      context: .
+      dockerfile: Dockerfile.storage
+    container_name: storage
+    env_file:
+      - .env
+    depends_on:
+      - nats
+      - cockroach
+    restart: always
+
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    ports:
+      - 80:80
+    container_name: nginx
+    depends_on:
+      - client
+    restart: always
+
+  cockroach:
+    image: cockroachdb/cockroach:v2.1.0
+    ports:
+      - 26257:26257
+    container_name: cockroach
+    volumes:
+      - "./cockroach-data:/cockroach/cockroach-data"
+    restart: always
+    command:
+      start --insecure
+
+  nats:
+    image: nats-streaming
+    ports:
+      - 4222:4222
+    container_name: nats
+    restart: always

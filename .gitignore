@@ -2,5 +2,6 @@ cmd/client-service
 cmd/storage-service
 /client-service
 /storage-service
+/build
 .idea
 .vscode
